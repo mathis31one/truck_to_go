@@ -1,0 +1,6 @@
+{
+  "appTitle": "truck_to_go",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
