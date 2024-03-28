@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:truck_to_go/src/services/DatabaseService.dart';
+import 'package:truck_to_go/src/views/TruckMapView.dart';
 
-import 'sample_feature/sample_item_details_view.dart';
-import 'sample_feature/sample_item_list_view.dart';
+import 'models/Truck.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -11,10 +12,11 @@ import 'settings/settings_view.dart';
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    required this.settingsController,
+    required this.settingsController, required this.databaseService,
   });
 
   final SettingsController settingsController;
+  final DatabaseService databaseService;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,20 @@ class MyApp extends StatelessWidget {
       listenable: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+
+          home: FutureBuilder<List<Truck>>(
+            future: databaseService.getTrucks(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator(); // Show loading indicator while data is being fetched
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                List<Truck>? trucks = snapshot.data;
+                return MapView(trucks: trucks!); // Pass the loaded trucks data to MapView
+              }
+            },
+          ),
           // Providing a restorationScopeId allows the Navigator built by the
           // MaterialApp to restore the navigation stack when a user leaves and
           // returns to the app after it has been killed while running in the
@@ -60,6 +76,7 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
+          /* TODO see if we will use this or not
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
           onGenerateRoute: (RouteSettings routeSettings) {
@@ -67,17 +84,12 @@ class MyApp extends StatelessWidget {
               settings: routeSettings,
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
                   default:
-                    return const SampleItemListView();
+                    return MapView(trucks: trucks!,);
                 }
               },
             );
-          },
+          },*/
         );
       },
     );

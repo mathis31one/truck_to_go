@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Pizza",
+    "description": "Les pizzas",
+    "geolocation": {
+      "latitude": 43.596867,
+      "longitude": 1.452446
+    },
+    "foodItems" : [
+      {
+        "title": "Margarita",
+        "description": "Tomates, Mozarella",
+        "price": 13.99
+      },
+      {
+        "title": "4 Fromages",
+        "description": "Chevre, Mozarella",
+        "price": 15.99
+      },
+      {
+        "title": "Reine",
+        "description": "Champignons, Mozarella",
+        "price": 12.99
+      }
+    ]
+  },
+  {
+    "name": "Burger",
+    "description": "Les burgers",
+    "geolocation": {
+      "latitude": 43.583698,
+      "longitude": 1.431979
+    },
+    "foodItems" : [
+      {
+        "title": "Boeuf",
+        "description": "Boeuf, Cheddar",
+        "price": 9.99
+      },
+      {
+        "title": "Poulet",
+        "description": "Poulet, Cantal",
+        "price": 11.99
+      },
+      {
+        "title": "Porc",
+        "description": "Porc, Reblochon",
+        "price": 12.99
+      }
+    ]
+  }
+]
