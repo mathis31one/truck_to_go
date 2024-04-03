@@ -48,5 +48,30 @@
         "price": 12.99
       }
     ]
+  },
+  {
+    "name": "Sushi",
+    "description": "Les sushis",
+    "geolocation": {
+      "latitude": 43.610953,
+      "longitude":  1.433230
+    },
+    "foodItems" : [
+      {
+        "title": "Sushis Avocats",
+        "description": "Poisson, Riz, Avocat",
+        "price": 9.99
+      },
+      {
+        "title": "Saumon",
+        "description": "Saumon, Riz",
+        "price": 11.99
+      },
+      {
+        "title": "Oeuf",
+        "description": "Oeuf, Riz, Algue",
+        "price": 12.99
+      }
+    ]
   }
 ]

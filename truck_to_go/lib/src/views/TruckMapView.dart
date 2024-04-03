@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:truck_to_go/src/views/TruckListView.dart';
 
 import 'package:truck_to_go/src/widgets/Footer.dart';
-import 'package:truck_to_go/src/views/TruckListView.dart';
 
 import '../models/Truck.dart';
 
-class MapView extends StatefulWidget {
-  final List<Truck> trucks; // Add this line to accept the list of trucks
-  MapView({required this.trucks}); // Add this line to accept the list of trucks
+class TruckMapView extends StatefulWidget {
+  final List<Truck> trucks;
+  const TruckMapView({super.key, required this.trucks});
+
+  static const routeName = '/map';
 
   @override
-  _MapViewState createState() => _MapViewState();
+  _TruckMapViewState createState() => _TruckMapViewState();
 }
 
-class _MapViewState extends State<MapView> {
+class _TruckMapViewState extends State<TruckMapView> {
   late GoogleMapController mapController;
 
   //Initial Map Center, Capitole Toulouse
@@ -24,8 +26,6 @@ class _MapViewState extends State<MapView> {
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-
-  static const routeName = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +42,16 @@ class _MapViewState extends State<MapView> {
         markers: _createMarkers(), //This line calls the method below to add markers
       ),
       bottomNavigationBar: Footer(
+        currentView: CurrentView.mapView, // Pass the current view as mapView
         onMapPressed: () {
-          //Already in map view
+          // Handle map view button pressed
         },
         onListPressed: () {
           //Navigate to the list view
-          Navigator.pushNamed(context, routeName);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => TruckListView(trucks: widget.trucks))
+          );
         },
       ),
     );
@@ -66,4 +70,3 @@ class _MapViewState extends State<MapView> {
     }).toSet();
   }
 }
-
