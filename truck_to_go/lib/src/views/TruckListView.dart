@@ -5,6 +5,7 @@ import 'package:truck_to_go/src/views/TruckMapView.dart';
 import 'package:truck_to_go/src/widgets/Footer.dart';
 
 import '../models/Truck.dart';
+import 'TruckDetailView.dart';
 
 class TruckListView extends StatefulWidget {
   final List<Truck> trucks;
@@ -93,7 +94,7 @@ class _TruckListViewState extends State<TruckListView> {
             child: ListView.builder(
               itemCount: widget.trucks.length,
               itemBuilder: (context, index) {
-                return _buildTruckCard(widget.trucks[index]);
+                return _buildTruckCard(context, widget.trucks[index]);
               },
             ),
           ),
@@ -115,37 +116,48 @@ class _TruckListViewState extends State<TruckListView> {
     );
   }
 
-  Widget _buildTruckCard(Truck truck) {
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Container(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Truck Image (Replace 'Image.network' with actual image loading)
-            SizedBox(
-              height: 100,
-              child: Image.network(
-                // TODO Replace with actual image URL from truck data
-                "https://upload.wikimedia.org/wikipedia/commons/4/4d/Cheeseburger.jpg",
-                fit: BoxFit.cover,
+  Widget _buildTruckCard(BuildContext context, Truck truck) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TruckDetailView(truck: truck),
+          ),
+        );
+      },
+      child: Card(
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Container(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Truck Image (Replace 'Image.network' with actual image loading)
+              SizedBox(
+                height: 100,
+                child: Image.network(
+                  // Replace with actual image URL from truck data
+                  // truck.imageUrl,
+                  "https://upload.wikimedia.org/wikipedia/commons/4/4d/Cheeseburger.jpg",
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            SizedBox(height: 8),
-            // Distance and Price Texts
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //TODO method distance to develop
-                // Text('Distance: ${truck.distance}'),
-                Text('Distance: 200m'),
-                //TODO method avgPrice to develop
-                // Text('Avg. Price: \$${truck.avgPrice}'),
-                Text('Avg. Price: 13.99€'),
-              ],
-            ),
-          ],
+              SizedBox(height: 8),
+              // Distance and Price Texts
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //TODO method distance to develop
+                  // Text('Distance: ${truck.distance}'),
+                  Text('Distance: 200m'),
+                  //TODO method avgPrice to develop
+                  // Text('Avg. Price: \$${truck.avgPrice}'),
+                  Text('Avg. Price: 13.99€'),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
