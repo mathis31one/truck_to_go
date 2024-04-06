@@ -20,8 +20,7 @@ class TruckDetailView extends StatelessWidget {
             height: 200, // Adjust height as needed
             child: Image.network(
               // Replace with actual image URL from truck data
-              // truck.imageUrl,
-              "https://upload.wikimedia.org/wikipedia/commons/4/4d/Cheeseburger.jpg",
+              truck.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
@@ -58,7 +57,7 @@ class TruckDetailView extends StatelessWidget {
                         SizedBox(height: 4),
                         Text(foodItem.description),
                         SizedBox(height: 4),
-                        Text('Price: \$${foodItem.price.toStringAsFixed(2)}'),
+                        Text('Price: ${foodItem.price.toStringAsFixed(2)}\€'),
                         Divider(), // Add a divider between food items
                       ],
                     );

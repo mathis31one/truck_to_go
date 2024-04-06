@@ -3,12 +3,14 @@ import 'FoodItem.dart';
 class Truck {
   final String name;
   final String description;
+  final String imageUrl;
   final Geolocation geolocation;
   final List<FoodItem> foodItems;
 
   Truck({
     required this.name,
     required this.description,
+    required this.imageUrl,
     required this.geolocation,
     required this.foodItems,
   });
@@ -28,6 +30,7 @@ class Truck {
     return Truck(
       name: json['name'],
       description: json['description'],
+      imageUrl: json['imageUrl'],
       geolocation: geolocation,
       foodItems: foodItems,
     );

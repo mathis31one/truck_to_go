@@ -2,6 +2,7 @@
   {
     "name": "Pizza",
     "description": "Les pizzas",
+    "imageUrl" : "https://t4.ftcdn.net/jpg/00/18/66/99/360_F_18669964_Txz4BS0OErzj9v9DHM3N51d8yFVa85dR.jpg",
     "geolocation": {
       "latitude": 43.596867,
       "longitude": 1.452446
@@ -27,6 +28,7 @@
   {
     "name": "Burger",
     "description": "Les burgers",
+    "imageUrl" : "https://upload.wikimedia.org/wikipedia/commons/4/4d/Cheeseburger.jpg",
     "geolocation": {
       "latitude": 43.583698,
       "longitude": 1.431979
@@ -52,6 +54,7 @@
   {
     "name": "Sushi",
     "description": "Les sushis",
+    "imageUrl" : "https://upload.wikimedia.org/wikipedia/commons/c/cf/Salmon_Sushi.jpg",
     "geolocation": {
       "latitude": 43.610953,
       "longitude":  1.433230

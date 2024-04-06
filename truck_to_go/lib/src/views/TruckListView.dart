@@ -127,25 +127,47 @@ class _TruckListViewState extends State<TruckListView> {
         );
       },
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Container(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Truck Image (Replace 'Image.network' with actual image loading)
-              SizedBox(
-                height: 100,
-                child: Image.network(
-                  // Replace with actual image URL from truck data
-                  // truck.imageUrl,
-                  "https://upload.wikimedia.org/wikipedia/commons/4/4d/Cheeseburger.jpg",
-                  fit: BoxFit.cover,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8)
+              ),
+              child: Container(
+                height: 140, // Set the height of the image section
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(truck.imageUrl), // Replace with actual image URL from truck data
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    color: Colors.black.withOpacity(0.5), // Add a semi-transparent background
+                    child: Text(
+                      truck.name, // Display truck name
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 8),
-              // Distance and Price Texts
-              Row(
+            ),
+            // Distance and Price Texts
+            Padding(
+              padding: EdgeInsets.all(8),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //TODO method distance to develop
@@ -156,8 +178,8 @@ class _TruckListViewState extends State<TruckListView> {
                   Text('Avg. Price: 13.99€'),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
