@@ -3,6 +3,7 @@ import 'package:truck_to_go/src/views/TruckMapView.dart';
 
 
 import 'package:truck_to_go/src/widgets/Footer.dart';
+import 'package:truck_to_go/src/widgets/TruckCard.dart';
 
 import '../models/Truck.dart';
 import 'TruckDetailView.dart';
@@ -94,7 +95,7 @@ class _TruckListViewState extends State<TruckListView> {
             child: ListView.builder(
               itemCount: widget.trucks.length,
               itemBuilder: (context, index) {
-                return _buildTruckCard(context, widget.trucks[index]);
+                return buildTruckCard(context, widget.trucks[index]);
               },
             ),
           ),
@@ -112,75 +113,6 @@ class _TruckListViewState extends State<TruckListView> {
         onListPressed: () {
           // Already in list view
         },
-      ),
-    );
-  }
-
-  Widget _buildTruckCard(BuildContext context, Truck truck) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TruckDetailView(truck: truck),
-          ),
-        );
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8)
-              ),
-              child: Container(
-                height: 140, // Set the height of the image section
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(truck.imageUrl), // Replace with actual image URL from truck data
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    color: Colors.black.withOpacity(0.5), // Add a semi-transparent background
-                    child: Text(
-                      truck.name, // Display truck name
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            // Distance and Price Texts
-            Padding(
-              padding: EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //TODO method distance to develop
-                  // Text('Distance: ${truck.distance}'),
-                  Text('Distance: 200m'),
-                  //TODO method avgPrice to develop
-                  // Text('Avg. Price: \$${truck.avgPrice}'),
-                  Text('Avg. Price: 13.99€'),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

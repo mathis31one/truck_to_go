@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:truck_to_go/src/views/TruckListView.dart';
-
 import 'package:truck_to_go/src/widgets/Footer.dart';
-
 import '../models/Truck.dart';
+import '../widgets/TruckMarkerInfoWindow.dart';
 
 class TruckMapView extends StatefulWidget {
   final List<Truck> trucks;
-  const TruckMapView({super.key, required this.trucks});
+  const TruckMapView({Key? key, required this.trucks}) : super(key: key);
 
   static const routeName = '/map';
 
@@ -18,9 +17,6 @@ class TruckMapView extends StatefulWidget {
 
 class _TruckMapViewState extends State<TruckMapView> {
   late GoogleMapController mapController;
-
-  //Initial Map Center, Capitole Toulouse
-  //To be changed with user's location
   final LatLng _center = const LatLng(43.604478, 1.443372);
 
   void _onMapCreated(GoogleMapController controller) {
@@ -39,18 +35,17 @@ class _TruckMapViewState extends State<TruckMapView> {
           target: _center,
           zoom: 11.0,
         ),
-        markers: _createMarkers(), //This line calls the method below to add markers
+        markers: _createMarkers(),
       ),
       bottomNavigationBar: Footer(
-        currentView: CurrentView.mapView, // Pass the current view as mapView
-        onMapPressed: () {
-          // Handle map view button pressed
-        },
+        currentView: CurrentView.mapView,
+        onMapPressed: () {},
         onListPressed: () {
-          //Navigate to the list view
           Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => TruckListView(trucks: widget.trucks))
+            context,
+            MaterialPageRoute(
+              builder: (context) => TruckListView(trucks: widget.trucks),
+            ),
           );
         },
       ),
@@ -66,6 +61,14 @@ class _TruckMapViewState extends State<TruckMapView> {
           title: truck.name,
           snippet: truck.description,
         ),
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return TruckMarkerInfoWindow(truck: truck);
+            },
+          );
+        }
       );
     }).toSet();
   }
