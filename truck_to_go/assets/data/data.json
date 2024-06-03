@@ -23,7 +23,8 @@
         "description": "Champignons, Mozarella",
         "price": 12.99
       }
-    ]
+    ],
+    "phoneNumber" : "+33 6 06 03 20 01"
   },
   {
     "name": "Burger",
@@ -49,7 +50,8 @@
         "description": "Porc, Reblochon",
         "price": 12.99
       }
-    ]
+    ],
+    "phoneNumber" : "+33 6 06 03 20 01"
   },
   {
     "name": "Sushi",
@@ -75,6 +77,7 @@
         "description": "Oeuf, Riz, Algue",
         "price": 12.99
       }
-    ]
+    ],
+    "phoneNumber" : "+33 6 06 03 20 01"
   }
 ]

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/Truck.dart';
+
 
 class TruckDetailView extends StatelessWidget {
   final Truck truck;
@@ -63,11 +65,38 @@ class TruckDetailView extends StatelessWidget {
                     );
                   },
                 ),
+                SizedBox(height: 24),
+                // Truck Phone Number Button
+                Center(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      _makePhoneCall(truck.phoneNumber);
+                    },
+                    icon: Icon(Icons.phone, color: Colors.white),
+                    label: Text(truck.phoneNumber),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blue,
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launch(launchUri.toString());
   }
 }

@@ -6,6 +6,7 @@ class Truck {
   final String imageUrl;
   final Geolocation geolocation;
   final List<FoodItem> foodItems;
+  final String phoneNumber;
 
   Truck({
     required this.name,
@@ -13,6 +14,7 @@ class Truck {
     required this.imageUrl,
     required this.geolocation,
     required this.foodItems,
+    required this.phoneNumber,
   });
 
   factory Truck.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class Truck {
       imageUrl: json['imageUrl'],
       geolocation: geolocation,
       foodItems: foodItems,
+      phoneNumber: json['phoneNumber'],
     );
   }
 }
